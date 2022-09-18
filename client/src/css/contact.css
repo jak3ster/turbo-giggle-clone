@@ -1,0 +1,143 @@
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+
+body {
+    font: 400 16px Montserrat, sans-serif;
+    color: #444;
+    padding: 0;
+    margin: 0;
+    background-color: #f8f8f8;
+}
+
+.message-border {
+    border-top: 10px solid var(--darkcyan);
+}
+
+.contact {
+    display: flex;
+    margin: 5rem 0 5rem 0 !important;
+    align-items: center;
+    justify-content: center;
+}
+
+.card {
+    /* width: 600px; */
+    background-color: #9fafdf;
+    border-radius: 3px;
+    box-shadow: 0 2px 10px rgba(17, 34, 68, 0.06);
+    overflow: hidden;
+    z-index: 1;
+}
+
+h2 {
+    margin: 1rem 1rem 0 !important;
+    font-size: 2.5rem !important;
+    text-align: center;
+    color: whitesmoke !important;
+    font-weight:bolder !important;
+}
+
+.form {
+    padding: 2rem;
+}
+
+.button {
+    display: block;
+    width: 100%;
+    background-color: #28a745;
+    border: none;
+    border-radius: 3px;
+    padding: 1ch;
+    font-size: 18px;
+    color: whitesmoke;
+    font-family: inherit;
+    font-weight: bolder;
+}
+
+.text-input {
+    position: relative;
+    margin-bottom: 1rem;
+}
+
+.text-input label {
+    position: absolute;
+    top: 1ch;
+    left: 1ch;
+    padding: 0 0.5ch;
+    pointer-events: none;
+    transition: 150ms ease;
+    color: #888;
+}
+
+.text-input label.label-focus {
+    position: absolute;
+    top: 0;
+    font-size: 0.9em;
+    color: darkcyan;
+    font-weight: bold;
+    transform: translateY(-50%);
+    background-color: #fff;
+    font-weight: 600;
+}
+
+.text-input input {
+    display: block;
+    width: 100%;
+    border: 2px solid #eee;
+    padding: 1ch;
+    border-radius: 3px;
+    transition: 150ms ease;
+    outline: none;
+    font-size: 1rem;
+    font-family: inherit;
+}
+
+.text-input input.input-focus {
+    border-color: darkcyan;
+}
+
+.text-area {
+    position: relative;
+    margin-bottom: 1rem;
+}
+
+.text-area label {
+    position: absolute;
+    top: 1ch;
+    left: 1ch;
+    padding: 0 0.5ch;
+    pointer-events: none;
+    transition: 150ms ease;
+    color: #888;
+}
+
+.text-area label.label-focus {
+    position: absolute;
+    top: 0;
+    font-size: 0.9em;
+    color: darkcyan;
+    font-weight: bold;
+    transform: translateY(-50%);
+    background-color: #fff;
+    font-weight: 600;
+}
+
+.text-area textarea {
+    display: block;
+    width: 100%;
+    border: 2px solid #eee;
+    padding: 1ch;
+    border-radius: 3px;
+    transition: 150ms ease;
+    outline: none;
+    font-size: 1rem;
+    font-family: inherit;
+    height: 8em;
+}
+
+.text-area textarea.input-focus {
+    border-color: darkcyan;
+}

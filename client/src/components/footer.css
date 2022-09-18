@@ -1,0 +1,20 @@
+footer {
+    width: 100%;
+    padding: 10px 0;
+    z-index: 1;
+}
+
+i {
+    font-size: 35px;
+    padding: 15px;
+    color: lightcyan;
+}
+
+i:hover {
+    color: grey;
+}
+
+p {
+    padding-left: 15px;
+    /* color: goldenrod; */
+}

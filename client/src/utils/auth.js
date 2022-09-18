@@ -32,10 +32,17 @@ class AuthService {
         return localStorage.getItem('id_token');
     }
 
-    login(idToken) {
+    login(idToken, entity) {
         // Saves user token to localStorage
+        console.log(idToken, entity);
         localStorage.setItem('id_token', idToken);
-        window.location.assign('/');
+        if (entity === "doctor") {
+            window.location.assign('/doctors-dashboard');
+            localStorage.setItem('entity', 'doctor');
+        } else if (entity === "patient") {
+            window.location.assign('/patients-dashboard');
+            localStorage.setItem('entity', 'patient');
+        }
     }
 
     logout() {
@@ -43,6 +50,12 @@ class AuthService {
         localStorage.removeItem('id_token');
         // this will reload the page and reset the state of the application
         window.location.assign('/');
+        // reset entity
+        localStorage.removeItem('entity');
+    }
+    getEntity() {
+        // Retrieves the type of user
+        return localStorage.getItem('entity');
     }
 }
 

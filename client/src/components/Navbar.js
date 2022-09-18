@@ -1,77 +1,151 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Navbar, Nav, Container, Modal, Tab } from 'react-bootstrap';
-import SignUpForm from './SignupForm';
-import LoginForm from './LoginForm';
+import React from "react";
+import { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
+import "./navbar.css";
+import { navbar } from './styles';
+import healthcare from "../assets/healthcare.png";
 
 import Auth from '../utils/auth';
 
-const AppNavbar = () => {
-    // set modal display state
-    const [showModal, setShowModal] = useState(false);
+const NavBar = () => {
+    const [open, setOpen] = useState(false);
+    const [screenWidth, setScreenWidth] = useState(0);
+    const location = useLocation();
+
+    const trackScreenWidth = () => {
+        const width = window.innerWidth;
+        setScreenWidth(width);
+        if (width > 600) {
+            setOpen(true);
+        }
+    };
+
+    const handleClose = () => {
+        if (screenWidth < 600) {
+            setOpen(false);
+        }
+    };
+
+    useEffect(() => {
+        trackScreenWidth();
+        window.addEventListener("resize", trackScreenWidth);
+        return () => window.removeEventListener("resize", trackScreenWidth);
+    }, []);
 
     return (
-        <>
-            <Navbar bg='dark' variant='dark' expand='lg'>
-                <Container fluid>
-                    <Navbar.Brand as={Link} to='/'>
-                        Google Books Search
-                    </Navbar.Brand>
-                    <Navbar.Toggle aria-controls='navbar' />
-                    <Navbar.Collapse id='navbar'>
-                        <Nav className='ml-auto'>
-                            <Nav.Link as={Link} to='/'>
-                                Search For Books
-                            </Nav.Link>
-                            {/* if user is logged in show saved books and logout */}
-                            {Auth.loggedIn() ? (
-                                <>
-                                    <Nav.Link as={Link} to='/saved'>
-                                        See Your Books
-                                    </Nav.Link>
-                                    <Nav.Link onClick={Auth.logout}>Logout</Nav.Link>
-                                </>
+        <nav style={navbar[".navbar"]}>
+            <div style={navbar[".nav-wrapper"]}>
+                <div style={navbar[".company"]}>
+                    <div style={navbar[".logo"]}>
+                        <img src={healthcare} alt="healthcare" />
+                    </div>
+                    <Link
+                        to="/"
+                        onClick={handleClose}
+                        style={{ color: location.pathname === "/" && "#afbdc9" }}>
+                        <h1 style={navbar[".h1"]}>
+                            Medical Portal
+                        </h1>
+                    </Link>
+                </div>
+                <div className="list-wrapper">
+                    <i
+                        className="fas fa-bars"
+                        style={{ opacity: !open ? 1 : 0 }}
+                        onClick={() => { setOpen(open); }}
+                    >
+                    </i>
+                    <i
+                        className="fas fa-times"
+                        style={{ opacity: open ? 1 : 0 }}
+                        onClick={() => { setOpen(!open); }}
+                    >
+                    </i>
+
+                    <ul style={{ left: open ? "0" : "-100vw" }}>
+
+                        {/* Dashboard link when logged in */}
+                        {Auth.loggedIn() ? (
+                            (Auth.getEntity() === "patient") ? (
+                                <li>
+                                    <Link
+                                        to="/patients-dashboard"
+                                        onClick={handleClose}
+                                        style={{ color: location.pathname === "/patients-dashboard" && "#afbdc9" }}
+                                    >
+                                        Dashboard
+                                    </Link>
+                                </li>
                             ) : (
-                                <Nav.Link onClick={() => setShowModal(true)}>Login/Sign Up</Nav.Link>
-                            )}
-                        </Nav>
-                    </Navbar.Collapse>
-                </Container>
-            </Navbar>
-            {/* set modal data up */}
-            <Modal
-                size='lg'
-                show={showModal}
-                onHide={() => setShowModal(false)}
-                aria-labelledby='signup-modal'>
-                {/* tab container to do either signup or login component */}
-                <Tab.Container defaultActiveKey='login'>
-                    <Modal.Header closeButton>
-                        <Modal.Title id='signup-modal'>
-                            <Nav variant='pills'>
-                                <Nav.Item>
-                                    <Nav.Link eventKey='login'>Login</Nav.Link>
-                                </Nav.Item>
-                                <Nav.Item>
-                                    <Nav.Link eventKey='signup'>Sign Up</Nav.Link>
-                                </Nav.Item>
-                            </Nav>
-                        </Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                        <Tab.Content>
-                            <Tab.Pane eventKey='login'>
-                                <LoginForm handleModalClose={() => setShowModal(false)} />
-                            </Tab.Pane>
-                            <Tab.Pane eventKey='signup'>
-                                <SignUpForm handleModalClose={() => setShowModal(false)} />
-                            </Tab.Pane>
-                        </Tab.Content>
-                    </Modal.Body>
-                </Tab.Container>
-            </Modal>
-        </>
+                                <li>
+                                    <Link
+                                        to="/doctors-dashboard"
+                                        onClick={handleClose}
+                                        style={{ color: location.pathname === "/doctors-dashboard" && "#afbdc9" }}
+                                    >
+                                        Dashboard
+                                    </Link>
+                                </li>
+                            )
+                        ) : (
+                            <li>
+                                <Link
+                                    to="/"
+                                    onClick={handleClose}
+                                    style={{ color: location.pathname === "/" && "#afbdc9" }}
+                                >
+                                    Home
+                                </Link>
+                            </li>)}
+
+                        {/* About link */}
+                        <li>
+                            <Link
+                                to="/about"
+                                onClick={handleClose}
+                                style={{ color: location.pathname === "/about" && "#afbdc9" }}
+                            >
+                                About
+                            </Link>
+                        </li>
+
+                        {/* Contact link */}
+                        <li>
+                            <Link
+                                to="/contact"
+                                onClick={handleClose}
+                                style={{ color: location.pathname === "/contact" && "#afbdc9" }}
+                            >
+                                Contact
+                            </Link>
+                        </li>
+
+                        {/* Logout Link::: if user is logged in show logout button*/}
+                        {Auth.loggedIn() ? (
+                            <li>
+                                <Link
+                                    to="/"
+                                    onClick={Auth.logout}
+                                >
+                                    Logout
+                                </Link>
+                            </li>
+                        ) : (
+                            <li>
+                                <Link
+                                    to="/doctors-login"
+                                    onClick={handleClose}
+                                    style={{ color: location.pathname === "/doctors-login" && "#afbdc9" }}
+                                >
+                                    Doctors
+                                </Link>
+                            </li>
+                        )}
+                    </ul>
+                </div>
+            </div>
+        </nav>
     );
 };
 
-export default AppNavbar;
+export default NavBar;

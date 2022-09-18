@@ -1,15 +1,23 @@
 const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
 
-// import schema from Book.js
-const bookSchema = require('./Book');
-
-const userSchema = new Schema(
+const doctorsSchema = new Schema(
     {
         username: {
             type: String,
-            required: true,
-            unique: true,
+            default: ""
+        },
+        firstName: {
+            type: String,
+            default: ""
+        },
+        lastName: {
+            type: String,
+            default: ""
+        },
+        gender: {
+            type: String,
+            default: ""
         },
         email: {
             type: String,
@@ -19,10 +27,18 @@ const userSchema = new Schema(
         },
         password: {
             type: String,
-            required: true,
+            required: true
         },
-        // set savedBooks to be an array of data that adheres to the bookSchema
-        savedBooks: [bookSchema],
+        appointments: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: 'appointments',
+            }
+        ],
+        usertype: {
+            type: String,
+            default: "doctor"
+        }
     },
     // set this to use virtual below
     {
@@ -33,25 +49,21 @@ const userSchema = new Schema(
 );
 
 // hash user password
-userSchema.pre('save', async function (next) {
+doctorsSchema.pre('save', async function (next) {
     if (this.isNew || this.isModified('password')) {
         const saltRounds = 10;
         this.password = await bcrypt.hash(this.password, saltRounds);
+        this.usertype = 'doctor';
     }
 
     next();
 });
 
 // custom method to compare and validate password for logging in
-userSchema.methods.isCorrectPassword = async function (password) {
+doctorsSchema.methods.isCorrectPassword = async function (password) {
     return bcrypt.compare(password, this.password);
 };
 
-// when we query a user, we'll also get another field called `bookCount` with the number of saved books we have
-userSchema.virtual('bookCount').get(function () {
-    return this.savedBooks.length;
-});
+const Doctors = model('doctors', doctorsSchema);
 
-const User = model('User', userSchema);
-
-module.exports = User;
+module.exports = Doctors;
