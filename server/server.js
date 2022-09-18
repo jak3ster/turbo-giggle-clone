@@ -11,9 +11,16 @@ const PORT = process.env.PORT || 3001;
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// if we're in production, serve client/build as static assets
-if (process.env.NODE_ENV === 'production') {
-    app.use(express.static(path.join(__dirname, '../client/build')));
+// // if we're in production, serve client/build as static assets
+// if (process.env.NODE_ENV === 'production') {
+//     app.use(express.static(path.join(__dirname, '../client/build')));
+// }
+
+if (process.env.NODE_ENV === "production") {
+    app.use(express.static("build"));
+    app.get("*", (req, res) => {
+        res.sendFile(path.resolve(__dirname, "build", "index.html"));
+    });
 }
 
 // app.get('*', (req, res) => {
@@ -21,9 +28,9 @@ if (process.env.NODE_ENV === 'production') {
 // });
 
 // FIX : Error: ENOENT: no such file or directory, stat 'C:\Users\Jay\Documents\_UCSD\Coding\bootcamp\Project3\turbo-giggle-clone\client\build\index.html'
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '../client/'));
-});
+// app.get('/', (req, res) => {
+//     res.sendFile(path.join(__dirname, '../client/'));
+// });
 // FIX : Error: ENOENT: no such file or directory, stat 'C:\Users\Jay\Documents\_UCSD\Coding\bootcamp\Project3\turbo-giggle-clone\client\build\index.html'
 
 const apolloServer = new ApolloServer({
