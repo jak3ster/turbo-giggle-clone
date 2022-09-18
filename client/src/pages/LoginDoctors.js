@@ -12,7 +12,7 @@ const LoginDoctor = () => {
     // set initial form state
     const [userFormData, setUserFormData] = useState({ email: '', password: '' });
 
-    const [loginDoctors, { error }] = useMutation(LOGIN_DOCTORS);
+    const [ loginDoctors ] = useMutation(LOGIN_DOCTORS);
 
     // set state for form validation
     const [validated] = useState(false);

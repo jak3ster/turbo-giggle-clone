@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useQuery } from "@apollo/client";
 import { GET_ALL_DOCTORS, GET_PATIENT } from '../utils/queries';
 import Auth from '../utils/auth';
 import "../css/style.css";
-import { dashboard, appointments, addappointments, history, edit, chatlogin, doctorProfile } from './styles';
+import { dashboard, doctorProfile } from './styles';
 
 const DashboardPatients = (props) => {
     const userData = Auth.getProfile();
@@ -37,7 +37,7 @@ const DashboardPatients = (props) => {
                 <div className="card mb-3 flex-row" key={item._id}>
                     <div className="row no-gutters">
                         <div className="col-auto">
-                            <img className="card-img-left" src={doctorProfile} alt="Card image cap"></img>
+                            <img className="card-img-left" src={doctorProfile} alt="image_cap"></img>
                         </div>
                     </div>
                     <div className="col">
@@ -46,7 +46,7 @@ const DashboardPatients = (props) => {
                             <h6 className="card-subtitle mb-2 text-muted">Type of Doctor</h6>
                             <p className="card-text">{item.email}</p>
                             <a href={'/makeAppointmentForm?doctorId=' + item._id} className="card-link">Make an Appointment</a>
-                            <a href="#" className="card-link">Message</a>
+                            {/* <a href="#" className="card-link">Message</a> */}
                         </div>
                     </div>
                 </div>

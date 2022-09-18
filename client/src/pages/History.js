@@ -1,7 +1,7 @@
 import React from "react";
 import { useQuery } from "@apollo/client";
 import Auth from '../utils/auth';
-import { GET_PATIENT_EMAIL_BY_ID, GET_ALL_DOCTORS, GET_PATIENT } from '../utils/queries';
+import { GET_PATIENT_EMAIL_BY_ID } from '../utils/queries';
 import "../css/style.css";
 
 const styles = {
@@ -20,7 +20,7 @@ const styles = {
 
 const History = (props) => {
     const userData = Auth.getProfile();
-    const { loading: l, error: e, data: d } = useQuery(GET_PATIENT_EMAIL_BY_ID, { variables: { _id: userData.data._id } });
+    const { loading: l, data: d } = useQuery(GET_PATIENT_EMAIL_BY_ID, { variables: { _id: userData.data._id } });
 
     if (l) {
         return <h2>LOADING...</h2>;

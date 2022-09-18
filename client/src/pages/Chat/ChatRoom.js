@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Form, Button, Alert } from 'react-bootstrap';
+import React from 'react';
+// import { Form, Button, Alert } from 'react-bootstrap';
 // import Auth from '../../utils/auth';
 import { chat } from '../styles';
 // import chatMain from "../../assets/images/chat/chat3.png";
@@ -7,87 +7,87 @@ import '../../css/chat.css';
 
 export const ChatRoom = () => {
     // set initial form state
-    const [userFormData, setUserFormData] = useState({ username: '', room: '' });
+    // const [userFormData, setUserFormData] = useState({ username: '', room: '' });
 
     // const [loginPatients] = useMutation(LOGIN_PATIENTS); //TODO: get username from currentlogin
 
     // set state for form validation
-    const [validated] = useState(false);
+    // const [validated] = useState(false);
     // set state for alert
-    const [showAlert, setShowAlert] = useState(false);
+    // const [showAlert, setShowAlert] = useState(false);
 
-    const handleInputChange = (event) => {
-        const { name, value } = event.target;
-        setUserFormData({ ...userFormData, [name]: value });
-        console.log({ name, value });
+    // const handleInputChange = (event) => {
+    //     const { name, value } = event.target;
+    //     setUserFormData({ ...userFormData, [name]: value });
+    //     console.log({ name, value });
 
-        // // DEBUG check whos logged in
-        // try {
-        //     let currentUser
-        //     const loggedIn = Auth.loggedIn();
-        //     if (loggedIn) {
-        //         currentUser = Auth.getProfile();
-        //         console.log(currentUser)
-        //         setUserFormData({
-        //             username: currentUser.username,
-        //             email: currentUser.email,
-        //             _id: currentUser._id,
-        //         });
-        //     }
-        //     console.log(loggedIn, currentUser)
-        // } catch (e) {
-        //     console.error(e);
-        //     setShowAlert(true);
-        // }
-        // // DEBUG check whos logged in
-    };
+    //     // // DEBUG check whos logged in
+    //     // try {
+    //     //     let currentUser
+    //     //     const loggedIn = Auth.loggedIn();
+    //     //     if (loggedIn) {
+    //     //         currentUser = Auth.getProfile();
+    //     //         console.log(currentUser)
+    //     //         setUserFormData({
+    //     //             username: currentUser.username,
+    //     //             email: currentUser.email,
+    //     //             _id: currentUser._id,
+    //     //         });
+    //     //     }
+    //     //     console.log(loggedIn, currentUser)
+    //     // } catch (e) {
+    //     //     console.error(e);
+    //     //     setShowAlert(true);
+    //     // }
+    //     // // DEBUG check whos logged in
+    // };
 
-    const handleFormSubmit = async (event) => {
-        event.preventDefault();
+    // const handleFormSubmit = async (event) => {
+    //     event.preventDefault();
 
-        // check if form has everything (as per react-bootstrap docs)
-        const form = event.currentTarget;
-        if (form.checkValidity() === false) {
-            event.preventDefault();
-            event.stopPropagation();
-        }
+    //     // check if form has everything (as per react-bootstrap docs)
+    //     const form = event.currentTarget;
+    //     if (form.checkValidity() === false) {
+    //         event.preventDefault();
+    //         event.stopPropagation();
+    //     }
 
-        // try {
-        //     const loggedIn = Auth.loggedIn();
-        //     if (loggedIn) {
-        //         const currentUser = Auth.getProfile();
-        //         console.log(currentUser)
-        //         setUserFormData({
-        //             username: currentUser.username,
-        //             email: currentUser.email,
-        //             _id: currentUser._id,
-        //         });
-        //     }
+    //     // try {
+    //     //     const loggedIn = Auth.loggedIn();
+    //     //     if (loggedIn) {
+    //     //         const currentUser = Auth.getProfile();
+    //     //         console.log(currentUser)
+    //     //         setUserFormData({
+    //     //             username: currentUser.username,
+    //     //             email: currentUser.email,
+    //     //             _id: currentUser._id,
+    //     //         });
+    //     //     }
 
-        //     // change page to chat dashboard!
-        // } catch (e) {
-        //     console.error(e);
-        //     setShowAlert(true);
-        // }
+    //     //     // change page to chat dashboard!
+    //     // } catch (e) {
+    //     //     console.error(e);
+    //     //     setShowAlert(true);
+    //     // }
 
-        // setUserFormData({
-        //     username: '',
-        //     email: '',
-        //     _id: '',
-        // });
-    };
+    //     // setUserFormData({
+    //     //     username: '',
+    //     //     email: '',
+    //     //     _id: '',
+    //     // });
+    // };
 
     return (
 
         <div style={chat['.chat-container']}>
             <header style={chat['.chat-header']}>
                 <h3><i className="fas fa-smile"></i> Medical Portal Chat Support</h3>
-                <a id="leave-btn" className="btn">Leave Room</a>
+                {/* <a id="leave-btn" className="btn">Leave Room</a> */}
             </header>
             <main style={chat['.chat-main']}>
                 <div className="chat-sidebar" >
                     <h3><i className="fas fa-comments"></i> Room Name:</h3>
-                    <h2 id="room-name" style={chat['.chat-sidebar h2']}></h2>
+                    {/* <h2 id="room-name" style={chat['.chat-sidebar h2']}></h2> */}
                     <h3><i className="fas fa-users"></i> Users</h3>
                     <ul id="users"></ul>
                 </div>

@@ -1,16 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useQuery } from "@apollo/client";
 import Auth from '../utils/auth';
-import { GET_PATIENT_EMAIL_BY_ID, GET_ALL_DOCTORS, GET_PATIENT } from '../utils/queries';
+import { GET_PATIENT_EMAIL_BY_ID, GET_PATIENT } from '../utils/queries';
 import ChatLogin from "./Chat/ChatLogin";
 import "../css/style.css";
 
-import { dashboard, appointments, addappointments, history, edit, chatlogin, doctorProfile } from './styles';
+import { dashboard, appointments, addappointments, history, edit, chatlogin } from './styles';
 
 
 const DashboardPatients = (props) => {
     const userData = Auth.getProfile();
-    const { loading: loadingDocs, error: DocError, data: doctorData } = useQuery(GET_ALL_DOCTORS);
+    // const { loading: loadingDocs, error: DocError, data: doctorData } = useQuery(GET_ALL_DOCTORS);
     const { loading: l, error: e, data: d } = useQuery(GET_PATIENT_EMAIL_BY_ID, { variables: { _id: userData.data._id } });
     const { loading: loadingPatient, error: patientError, data: patientData } = useQuery(GET_PATIENT, { variables: { _id: userData.data._id } });
     console.log(loadingPatient, patientError, patientData, "JAVI");

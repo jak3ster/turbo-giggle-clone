@@ -1,13 +1,13 @@
 import React from "react";
 import { useQuery } from "@apollo/client";
 import Auth from '../utils/auth';
-import { GET_PATIENT_EMAIL_BY_ID, GET_ALL_DOCTORS, GET_PATIENT, GET_DOCTOR_EMAIL_BY_ID } from '../utils/queries';
+import { GET_DOCTOR_EMAIL_BY_ID } from '../utils/queries';
 import "../css/style.css";
 
 import appointments from "../assets/appointments.png";
 import addappointments from "../assets/add_appointments.png";
-import history from "../assets/history.png";
-import edit from "../assets/edit.png";
+// import history from "../assets/history.png";
+// import edit from "../assets/edit.png";
 
 const styles = {
     container: {
