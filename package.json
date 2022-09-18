@@ -22,9 +22,7 @@
   },
   "homepage": "https://github.com/jak3ster/turbo-giggle-clone#readme",
   "dependencies": {
-    "if-env": "^1.0.4"
-  },
-  "devDependencies": {
+    "if-env": "^1.0.4",
     "concurrently": "^5.2.0"
   }
 }
